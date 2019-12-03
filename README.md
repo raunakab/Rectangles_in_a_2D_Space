@@ -26,17 +26,17 @@ Therefore, by taking advantage of this fact, I came up with the following algori
 3.	Calculate the line vector that is formed by these two points. Let's call this line vector L_a.
 4.	Calculate the subspace which is perpendicular to L_a. Since we are working in 2-dimensional space, this subspace would also be a line vector. However, in 3-dimensional space, the perpendicular subspace would be a planar subspace. In general, in an n-dimensional space, the subspace which is perpendicular to the line vector L_a has a degree of (n-1). Let's call this subspace A_p.
 5.	Iterate over all the remaining points in the set P to check whether or not they exist in the perpendicular subspace, A_p.
-	a.	If it's discovered that a point in the remaining set exists in the perpendicular subspace A_p, create a new user-defined object called a *Corner*.
-	b.	A Corner object is defined as a having 3 points (A, B, C), such that the angle ABC will be pi/2 radians.
-	c.	This *Corner* object will have 3 fields in it:
-		i.	Edge A: defined as the one of the corner's edges.
-		ii.	Edge B: defined as the second of the corner's edges.
-		iii.	Base: define as the point that connects to Edge A and Edge B. The angle of the angle formed by connecting (EdgeA)-(Base)-(EdgeB) should be pi/2 radians.
-	d.	After creating this corner object, place it in a HashSet, where the index of the array is determined by hashing *only the edges* and the actual element in the index is the Corner object.
-		i.	(The reason why we hash based on only the edges, and don't take the base into account, will become apparent later on...)
-		ii.	If the insertion into the HashSet results in a collision, then check to see if two Corner objects that are colliding have the same edges but a _**different**_ base.
-		iii.	Making sure that the base is different if the edges match is extremely important! This guarantees to us that these two Corner objects form a square! This is also the reason we insert into the set by only hashing the edges. Corner objects that have the same edges will *definitively __have__* to hash to the same value! Thus, if two Corner objects hash to the same value, then that means either that the two Corner objects are *exactly* identical (which doesn't form a square) or the two Corner objects differ only by a base! And since Corner objects are defined such that all bases have an angle of pi/2, two Corner objects that hash to the same value but have different bases must, by definition, be a rectangle!
-	e.	Create a new Shape object that consists of all the four points that constitute the rectangle. Insert it into a set of Shape objects. Let's call this set of Shape objects R. (If there exists another Shape object in the set R, then insertion into this set will fail).
+	* Item 5a	If it's discovered that a point in the remaining set exists in the perpendicular subspace A_p, create a new user-defined object called a *Corner*.
+	* Item 5b	A Corner object is defined as a having 3 points (A, B, C), such that the angle ABC will be pi/2 radians.
+	* Item 5c	This *Corner* object will have 3 fields in it:
+		* Item i	Edge A: defined as the one of the corner's edges.
+		* Item ii	Edge B: defined as the second of the corner's edges.
+		* Item iii	Base: define as the point that connects to Edge A and Edge B. The angle of the angle formed by connecting (EdgeA)-(Base)-(EdgeB) should be pi/2 radians.
+	* Item 5d	After creating this corner object, place it in a HashSet, where the index of the array is determined by hashing *only the edges* and the actual element in the index is the Corner object.
+		* Item i	(The reason why we hash based on only the edges, and don't take the base into account, will become apparent later on...)
+		* Item ii	If the insertion into the HashSet results in a collision, then check to see if two Corner objects that are colliding have the same edges but a _**different**_ base.
+		* Item iii	Making sure that the base is different if the edges match is extremely important! This guarantees to us that these two Corner objects form a square! This is also the reason we insert into the set by only hashing the edges. Corner objects that have the same edges will *definitively __have__* to hash to the same value! Thus, if two Corner objects hash to the same value, then that means either that the two Corner objects are *exactly* identical (which doesn't form a square) or the two Corner objects differ only by a base! And since Corner objects are defined such that all bases have an angle of pi/2, two Corner objects that hash to the same value but have different bases must, by definition, be a rectangle!
+	* Item 5e	Create a new Shape object that consists of all the four points that constitute the rectangle. Insert it into a set of Shape objects. Let's call this set of Shape objects R. (If there exists another Shape object in the set R, then insertion into this set will fail).
 6.	Repeat steps 2 through 6 for the rest of the points. Essentially, increment p_b (i.e. choose a new p_b such that (p_b_new != p_b_old) && (p_b_new != p_a).
 7.	Repeat steps 1 through 7 for the rest of the points. Essentially, increment p_a (i.e. choose a new p_a such that (p_a_new != p_a_old).
 8.	Return the length of the set of Shape objects, length(R). This is the answer.
