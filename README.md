@@ -26,7 +26,7 @@ Therefore, by taking advantage of this fact, I came up with the following algori
 3.	Calculate the line vector that is formed by these two points. Let's call this line vector L_a.
 4.	Calculate the subspace which is perpendicular to L_a. Since we are working in 2-dimensional space, this subspace would also be a line vector. However, in 3-dimensional space, the perpendicular subspace would be a planar subspace. In general, in an n-dimensional space, the subspace which is perpendicular to the line vector L_a has a degree of (n-1). Let's call this subspace A_p.
 5.	Iterate over all the remaining points in the set P to check whether or not they exist in the perpendicular subspace, A_p.
-	* Item 5a	If it's discovered that a point in the remaining set exists in the perpendicular subspace A_p, create a new user-defined object called a *Corner*.
+	* a)\t	If it's discovered that a point in the remaining set exists in the perpendicular subspace A_p, create a new user-defined object called a *Corner*.
 	* Item 5b	A Corner object is defined as a having 3 points (A, B, C), such that the angle ABC will be pi/2 radians.
 	* Item 5c	This *Corner* object will have 3 fields in it:
 		* Item i	Edge A: defined as the one of the corner's edges.
