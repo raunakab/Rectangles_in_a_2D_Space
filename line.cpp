@@ -1,3 +1,5 @@
+#include <iostream>
+
 bool array_check(double const * const va, int va_dim, double const * const vb, int vb_dim) {
     if (va_dim != vb_dim) return false;
     for (int i=0; i<va_dim; i++) {
@@ -42,5 +44,21 @@ class Line {
             if (dim != other.get_dim()) return false;
             if ((vector == other.get_vector()) && (offset == other.get_offset())) return true;
             return (array_check(vector,dim,other.get_vector(),other.get_dim()) && array_check(offset,dim,other.get_offset(),other.get_dim()));
+        }
+        bool operator!=(Line const & other) {
+            return !operator==(other);
+        }
+        double const * const get_vector() const {
+            return this->vector;
+        }
+        double const * const get_offset() const {
+            return this->offset;
+        }
+        int const get_dim() const {
+            return this->dim;
+        }
+
+        bool const exists_in_subspace(std::pair<double,double> const * const point) const {
+            int a = ((point->first - offset->first) / vector->first);
         }
 };

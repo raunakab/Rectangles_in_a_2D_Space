@@ -130,7 +130,7 @@ class Corner {
             eB = nullptr;
             base = nullptr;
         }
-        Corner & const operator=(Corner const & other) {
+        Corner const & operator=(Corner const & other) {
             this->~Corner();
             return *(new Corner(&other));
         }
@@ -162,11 +162,11 @@ class Corner {
         std::pair<double,double> * const & get_base() const {
             return this->base;
         }
-        void set(std::pair<double,double> const * const new_ptr, std::pair<double,double> const * * const self_ptr) {
-            if ((new_ptr == nullptr) || (self_ptr == nullptr)) return;
+        void change_ptrs(std::pair<double,double> * const new_ptr, std::pair<double,double> * * const self_ptr) {
+            if (self_ptr == nullptr) return;
             *(self_ptr) = new_ptr;
         }
-        void set_src(std::pair<double,double> const * const & new_ptr, std::pair<double,double> * const * const & self_ptr) {
+        void set_src(std::pair<double,double> * const & new_ptr, std::pair<double,double> * * const & self_ptr) {
             if ((new_ptr == nullptr) || (self_ptr == nullptr) || (*(self_ptr) == nullptr)) return;
             (*self_ptr)->first = new_ptr->first;
             (*self_ptr)->second = new_ptr->second;
@@ -196,3 +196,7 @@ class Corner {
         //     this->base->second = base->second;
         // }
 };
+
+int main() {
+    return 0;
+}
