@@ -145,7 +145,7 @@ class Corner {
         }
         int const hash(int hash_mod) const {
             if ((eA == nullptr) || (eB == nullptr) || (base == nullptr)) return -1;
-            return ((pow(eA->first,1)+pow(eA->second,3)+pow(eB->first,5)+pow(eB->second,7))%hash_mod);
+            return (((int) (pow(eA->first,1.0)+pow(eA->second,3.0)+pow(eB->first,5.0)+pow(eB->second,7.0)))%hash_mod);
         }
         bool const shapeable(Corner const * const other) const {
             if ((eA == other->get_eA()) && (this->eB == other->get_eB()) && (this->eA != other->get_base())) return true;
@@ -166,10 +166,10 @@ class Corner {
             if ((new_ptr == nullptr) || (self_ptr == nullptr)) return;
             *(self_ptr) = new_ptr;
         }
-        void set_src(std::pair<double,double> const * const & new_ptr, std::pair<double,double> const * * const & self_ptr) {
+        void set_src(std::pair<double,double> const * const & new_ptr, std::pair<double,double> * const * const & self_ptr) {
             if ((new_ptr == nullptr) || (self_ptr == nullptr) || (*(self_ptr) == nullptr)) return;
-            *(self_ptr)->first = new_ptr->first;
-            *(self_ptr)->second = new_ptr->second;
+            (*self_ptr)->first = new_ptr->first;
+            (*self_ptr)->second = new_ptr->second;
         }
         // void set_eA(std::pair<double,double> const * const & eA) {
         //     this->eA = eA;

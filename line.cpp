@@ -1,3 +1,11 @@
+bool array_check(double const * const va, int va_dim, double const * const vb, int vb_dim) {
+    if (va_dim != vb_dim) return false;
+    for (int i=0; i<va_dim; i++) {
+        if ((*(va+i)) != (*(vb+i))) return false;
+    }
+    return true;
+}
+
 class Line {
     private:
         double* vector;
@@ -31,8 +39,8 @@ class Line {
             return *(new Line(&other));
         }
         bool operator==(Line const & other) {
-            if (dim != other->get_dim()) return false;
-            if ((vector == other->get_vector()) && (offset == other->get_offset())) return true;
-            return (array_check(vector,other->get_vector()) && array_check(offset,other->get_offset()));
+            if (dim != other.get_dim()) return false;
+            if ((vector == other.get_vector()) && (offset == other.get_offset())) return true;
+            return (array_check(vector,dim,other.get_vector(),other.get_dim()) && array_check(offset,dim,other.get_offset(),other.get_dim()));
         }
 };
